@@ -76,8 +76,6 @@ public class EmailListener {
         archive.setDate(date);
         archiveRepository.save(archive);
 
-
-
         emailService.sendSimpleMessage(s.getEmail(), "Hotelino Reservation Confirmation", text);
     }
 
@@ -125,6 +123,27 @@ public class EmailListener {
         archive.setDate(date);
         archiveRepository.save(archive);
         emailService.sendSimpleMessage(s.getEmail(), "Hotelino Reservation Cancelation", text);
+    }
+
+    @JmsListener(destination = "${destination.passwordReset}", concurrency = "5-10")
+    public void sendPasswordResetNotification(Message message) throws JMSException{
+        System.out.println("Reset uslo");
+        PasswordResetNotificationDto s = messageHelper.getMessage(message, PasswordResetNotificationDto.class);
+
+        NotificationType t = notificationTypeRepository.getByName(s.getType().name());
+
+        String text = t.getText();
+        text = text.replace("[[link]]", "http://localhost:8080/api/users/resetPassword/"+s.getId());
+
+        //Cuvanje u arhivi
+        Archive archive = new Archive();
+        archive.setEmail(s.getEmail());
+        archive.setTipNotifikacije(s.getType().name());
+        Date date = new Date();
+        archive.setDate(date);
+        archiveRepository.save(archive);
+
+        emailService.sendSimpleMessage(s.getEmail(), "Hotelino Reservation Confirmation", text);
     }
 
     /*

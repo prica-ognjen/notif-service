@@ -27,8 +27,8 @@ public class TestDataRunner implements CommandLineRunner {
 
         NotificationType t2 = new NotificationType();
         //ime prezime link
-        t2.setName("ResetPassword");
-        t2.setText("Pozdrav [[ime]] [[prezime]]! Poslat je zahtev za promenu sifre vaseg naloga. Ukoliko ste vi to poslali, molimo vas da posetite sledeci link kako biste resetovali sifru: [[link]]");
+        t2.setName("NOTIFICATION_RESET_PASSWORD");
+        t2.setText("Pozdrav! Poslat je zahtev za promenu sifre vaseg naloga. Ukoliko ste vi to poslali, molimo vas da posetite sledeci link kako biste resetovali sifru: [[link]]");
         notificationTypeService.save(t2);
 
         NotificationType t3 = new NotificationType();
@@ -55,7 +55,6 @@ public class TestDataRunner implements CommandLineRunner {
         t5.setName("NOTIFICATION_CANCEL_RESERVATION");
         t5.setText("Postovani rezervacija broj [[idRezervacije]] je otkazana\n");
         notificationTypeService.save(t5);
-
     }
 }
 
