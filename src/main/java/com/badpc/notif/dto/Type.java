@@ -1,0 +1,11 @@
+package com.badpc.notif.dto;
+
+public enum Type {
+
+    NOTIFICATION_REGISTER,
+    NOTIFICATION_RESERVE_CLIENT,
+    NOTIFICATION_RESERVE_MANAGER,
+    NOTIFICATION_CANCEL_RESERVATION
+
+
+}
